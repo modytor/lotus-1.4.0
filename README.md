@@ -15,6 +15,7 @@ Filecoin 挖矿软件分布式Miner版本，支持PoSt-miner、Deal-miner、Seal
     - Winning-post-miner：负责出块时扇区的随机抽查；
   - Deal-miner：负责接单和检索，和订单扇区密封的任务分配；
   - Seal-miner：负责普通扇区密封的任务分配。
+- 调度管理基于自定义的任务数量，可以精确控制机器的工作状态
 
 ## 实现思路
 **1. 解决SectorID不重复**
