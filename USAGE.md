@@ -85,7 +85,7 @@ Deal-miner需要配置外网端口转发和`lotus-miner actor set-addrs`配置�
 
 **3. Seal-miner**
 ```
-lotus-miner run --wdpost=false --wnpost=false --p2p=true --sctype=get --sclisten=192.16810.50:1357
+lotus-miner run --wdpost=false --wnpost=false --p2p=false --sctype=get --sclisten=192.16810.50:1357
 ```
 
 **需要注意的几个问题：**
