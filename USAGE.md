@@ -59,7 +59,6 @@ lotus-miner run --p2p=true
 lotus-miner run --wdpost=true --wnpost=true --p2p=false --sctype=alloce --sclisten=192.168.1.50:1357
 ```
 其中`192.168.1.50`为PoSt-miner的内网IP，`1357`为扇区分配服务的监听端口。
-PoSt-miner启动后，在日志中将会有`This miner will be disable p2p`的提示。
 
 如果PoSt-miner为两台机器，则需要分别配置`--wdpost`和`--wnpost`参数：
 
@@ -91,7 +90,6 @@ lotus-miner run --wdpost=false --wnpost=false --p2p=true --sctype=get --sclisten
 
 **需要注意的几个问题：**
 - Seal-miner和Deal-miner的配置参数相同，原理上都是密封扇区的Miner；  
-- Seal-miner和Deal-miner启动后，日志中将会输出`This miner will be disable minning block`和`This miner will be disable windowPoSt`；  
 - Seal-miner可根据自己的集群规模，配置多台；
 
 ## Worker配置
