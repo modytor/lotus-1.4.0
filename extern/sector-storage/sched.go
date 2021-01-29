@@ -520,7 +520,11 @@ func (sh *scheduler) getTaskFreeCount(wid WorkerID, phaseTaskType sealtasks.Task
 		log.Infof("worker %s, PC1: %d limit count, PC1 Free: %d", whl.info.Hostname, pc1LimitCount, pc1FreeCount)
 		if(pc1FreeCount > freeCount) {
 			log.Infof("worker %s, will add AP: %d", whl.info.Hostname, freeCount)
-			return freeCount
+			
+			if freeCount >= 0 { // 空闲数量不小于0，小于0也要校准为0
+				return freeCount
+			}
+			return 0
 		}
 		else{
 			log.Infof("worker %s, PC1:%d free count, will add AP:%d", whl.info.Hostname, pc1FreeCount, pc1FreeCount)
