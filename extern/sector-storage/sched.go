@@ -511,6 +511,24 @@ func (sh *scheduler) getTaskFreeCount(wid WorkerID, phaseTaskType sealtasks.Task
 	whl := sh.workers[wid]
 	log.Infof("worker %s %s: %d free count", whl.info.Hostname, phaseTaskType, freeCount)
 
+	//Add by kedy 2020/1/29, limit the PC1 count.
+	if phaseTaskType == sealtasks.TTAddPiece {
+		pc1LimitCount :=  sh.getTaskCount(wid, sealtasks.TTPreCommit1, "limit")
+		pc1RunCount := sh.getTaskCount(wid, sealtasks.TTPreCommit1, "run")
+		pc1FreeCount := pc1LimitCount - p2runCount
+
+		log.Infof("worker %s, PC1: %d limit count, PC1 Free: %d", whl.info.Hostname, pc1LimitCount, pc1FreeCount)
+		if(pc1FreeCount > freeCount) {
+			log.Infof("worker %s, will add AP: %d", whl.info.Hostname, freeCount)
+			return freeCount
+		}
+		else{
+			log.Infof("worker %s, PC1:%d free count, will add AP:%d", whl.info.Hostname, pc1FreeCount, pc1FreeCount)
+			return pc1FreeCount
+		}
+	}
+	//End of limit.
+
 	if phaseTaskType == sealtasks.TTAddPiece || phaseTaskType == sealtasks.TTPreCommit1 {
 		if freeCount >= 0 { // 空闲数量不小于0，小于0也要校准为0
 			return freeCount
